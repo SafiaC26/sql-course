@@ -154,13 +154,13 @@ FROM
 
 -- GROUP BY a single column
 SELECT
-	ps.AdmittedDate
+	ps.Ward
 	, COUNT(*) AS NumberOfPatients
 	, SUM(ps.Tariff) AS TotalTariff
 FROM
 	PatientStay ps
 GROUP BY
-	ps.AdmittedDate;
+	ps.ward;
 
 -- GROUP BY two columns
 SELECT
@@ -182,8 +182,9 @@ SELECT
 	AdmittedDate
 	, SUM(ps.Tariff) AS TotalTariff
 	, MIN(ps.Tariff) AS SmallestTariff
+	, MAX(ps.Tariff) AS LargestTariff
 	, AVG(ps.Tariff) AS AverageTariff
-	, COUNT(*) AS NumberOfTariffs
+	, COUNT(*) AS NumberOfPatients 
 FROM
 	PatientStay ps
 WHERE
@@ -216,6 +217,7 @@ FROM
 SELECT
 	ps.PatientId
 	, ps.AdmittedDate
+	, ps.Hospital
 	, h.HospitalType
 	, h.HospitalSize
 FROM
